@@ -1,0 +1,18 @@
+from sistema_de_biblioteca.src.model.livro import Livro
+
+class Biblioteca:
+
+    def emprestar(self, livro):
+        if livro.disponivel == True:
+            livro.disponivel = False
+            print("Livro emprestado com sucesso!")
+        else:
+            print("O livro não está disponível.")
+
+    def devolver_livros(self, livro):
+        livro.disponivel = True
+        print("Livro devolvido com sucesso!")
+
+
+
+lista_de_livros: list[Livro] = [Livro("Livro branco", "Autor 1"), Livro("Livro amarelo", "Autor 2"), Livro("Livro verde", "Autor 3")]

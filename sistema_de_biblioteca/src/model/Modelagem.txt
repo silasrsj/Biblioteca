@@ -1,0 +1,29 @@
+Sistema de Biblioteca
+Crie 3 classes:
+
+- Livro (título, autor, disponível)
+
+- Usuario (nome, livros_emprestados)
+
+- Biblioteca (lista de livros)
+
+A biblioteca deve ter métodos para emprestar e devolver livros.
+O usuário só pode pegar emprestado se o livro estiver disponível.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Um sistema de biblioteca tem o usuário, livro e a biblioteca.
+A biblioteca armazena os livros e tem os métodos de emprestar e devolver livros, pra isso a biblioteca precisar ter uma lista de livros.
+
+
+Bem vindo "Usuário"!
+
+Escolha uma das opções abaixo:
+
+1 - Listar livros
+2 - Emprestar livro
+3 - Devolver livro
+4 - Livros emprestados
+5 - Voltar ao menu principal
+6 - Encerrar.
