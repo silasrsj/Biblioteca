@@ -1,5 +1,8 @@
+from sistema_de_biblioteca.src.model.livro import Livro
+
+
 class Usuario:
-    def __init__(self, nome, livros_emprestados):
+    def __init__(self, nome, livros_emprestados: list[Livro]):
         self.__cpf = 0
         self.__nome = nome
         self.__livros_emprestados = livros_emprestados
@@ -16,6 +19,9 @@ class Usuario:
 
     def set_livros_emprestados(self, livros_emprestados):
         self.__livros_emprestados = livros_emprestados
+
+    def adicionar_livro(self, livro: Livro):
+        self.__livros_emprestados.append(livro)
 
     def get_cpf(self):
         return self.__cpf
