@@ -3,7 +3,7 @@ from sistema_de_biblioteca.src.model.livro import Livro
 
 class Usuario:
     def __init__(self, nome, livros_emprestados: list[Livro]):
-        self.__cpf = 0
+        self.__cpf = ""
         self.__nome = nome
         self.__livros_emprestados = livros_emprestados
 
