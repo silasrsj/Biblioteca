@@ -11,7 +11,7 @@ __pycache__/
 venv/
 .venv/
 .env
-.idea/
+*.idea/
 
 # Dependências
 # Ignora o diretório onde o pip instala as bibliotecas
