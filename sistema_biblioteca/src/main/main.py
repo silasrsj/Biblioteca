@@ -1,6 +1,6 @@
-from sistema_de_biblioteca.src.model.usuario import Usuario
-from sistema_de_biblioteca.src.model.livro import Livro
-from sistema_de_biblioteca.src.model.biblioteca import lista_de_livros
+from sistema_biblioteca.src.model.usuario import Usuario
+from sistema_biblioteca.src.model.livro import Livro
+from sistema_biblioteca.src.model.biblioteca import lista_de_livros
 lista_de_usuarios: list[Usuario] = []
 
 def cabecalho():
