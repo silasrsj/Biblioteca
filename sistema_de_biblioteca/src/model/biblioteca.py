@@ -17,4 +17,4 @@ class Biblioteca:
 
 
 
-lista_de_livros: list[Livro] = [Livro("Livro branco", "Autor 1"), Livro("Livro amarelo", "Autor 2"), Livro("Livro verde", "Autor 3")]
+lista_de_livros: list[Livro] = []

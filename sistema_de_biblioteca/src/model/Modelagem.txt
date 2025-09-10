@@ -27,3 +27,18 @@ Escolha uma das opções abaixo:
 4 - Livros emprestados
 5 - Voltar ao menu principal
 6 - Encerrar.
+
+--------------------------------------------
+
+-Criar ID para livros
+-Refatorar a classe Usuário, deixá-la mais abstrata
+-Classe Aluno irá herdar de usuário
+-Classe admin irá herdar de usuário e também terá atributos e métodos exclusivos:
+:: lista de alunos
+::
+>> Adicionar Livro
+>> Remover Livro
+>> Acicionar Aluno/remover
+>> Listar Alunos Cadastrados
+
+
