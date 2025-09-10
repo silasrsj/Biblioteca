@@ -1,4 +1,4 @@
-from sistema_de_biblioteca.src.model.livro import Livro
+from sistema_biblioteca.src.model.livro import Livro
 
 class Biblioteca:
 
