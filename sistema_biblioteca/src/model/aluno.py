@@ -1,5 +1,5 @@
-from sistema_de_biblioteca.src.model.usuario import Usuario
-from sistema_de_biblioteca.src.model.livro import Livro
+from sistema_biblioteca.src.model.usuario import Usuario
+from sistema_biblioteca.src.model.livro import Livro
 
 class Aluno(Usuario):
     def __init__(self, nome, cpf, livros_emprestados: list[Livro]):

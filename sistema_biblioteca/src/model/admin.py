@@ -1,7 +1,7 @@
-from sistema_de_biblioteca.src.model.usuario import Usuario
-from sistema_de_biblioteca.src.model.aluno import Aluno
-from sistema_de_biblioteca.src.model.livro import Livro
-from sistema_de_biblioteca.src.utils.util import gerar_id
+from sistema_biblioteca.src.model.usuario import Usuario
+from sistema_biblioteca.src.model.aluno import Aluno
+from sistema_biblioteca.src.model.livro import Livro
+from sistema_biblioteca.src.utils.util import gerar_id
 
 class Admin(Usuario):
     def __init__(self, nome, cpf):

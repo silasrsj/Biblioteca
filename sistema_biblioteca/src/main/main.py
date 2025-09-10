@@ -1,7 +1,7 @@
-from sistema_de_biblioteca.src.model.admin import Admin
-from sistema_de_biblioteca.src.model.aluno import Aluno
-from sistema_de_biblioteca.src.model.livro import Livro
-from sistema_de_biblioteca.src.model.biblioteca import lista_de_livros
+from sistema_biblioteca.src.model.admin import Admin
+from sistema_biblioteca.src.model.aluno import Aluno
+from sistema_biblioteca.src.model.livro import Livro
+from sistema_biblioteca.src.model.biblioteca import lista_de_livros
 lista_de_alunos: list[Aluno] = []
 admin1 = Admin("admin", "2025")
 
@@ -211,7 +211,6 @@ def opcoes_aluno(aluno):
                 break
             except ValueError:
                 input("Entrada inválida, precione ENTER para continuar.")
-    
         match escolha_opcao:
             case 1:
                 listar_livros("LISTA DE LIVROS DA BIBLIOTECA", lista_de_livros)
@@ -219,17 +218,13 @@ def opcoes_aluno(aluno):
                 emprestar_livro(aluno)
             case 3:
                 devolver_livro(aluno)
-
             case 4:
                 meus_livros_emprestados(aluno)
-
             case 5:
                 input("Sessão encerrada com sucesso! Precione ENTER para continuar")
-                main()
-
+                break
             case 6:
                 break
-
             case _:
                 input("Opção inválida, precione ENTER e tente novamente.")
 
@@ -253,7 +248,6 @@ def main():
             try:
                 escolha = int(input("\nEscolha uma das opções acima: "))
                 break
-
             except ValueError:
                 input("Entrada inválida, precione ENTER e tente novamente.")
 
@@ -263,14 +257,11 @@ def main():
             case 2:
                 acessar_conta()
                 print("Biblioteca encerrada, até mais!")
-                break
             case 3:
                 entrar_admin()
-
             case 4:
                 print("Biblioteca encerrada, até mais!")
                 break
-
             case _:
                 input("Opção inválida, precione ENTER e tente novamente.")
 

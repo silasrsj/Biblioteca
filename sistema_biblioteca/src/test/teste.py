@@ -1,1 +1,0 @@
-print(f"| {"TÍTULO":<15} | {"AUTOR":<12} | {"DISPONIBILIDADE":<15} |")
