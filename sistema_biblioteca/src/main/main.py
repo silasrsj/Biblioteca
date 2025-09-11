@@ -32,7 +32,7 @@ def criar_cadastro(mensagem_nome, mensagem_cpf):
 
     novo_aluno = Aluno(nome, cpf, [])
     lista_de_alunos.append(novo_aluno)
-    input(f"Usuário [ {novo_aluno.get_nome()} ] cadastrado com sucesso! Precione ENTER para continuar.")
+    input(f"Usuário [{novo_aluno.get_nome()}] cadastrado com sucesso! Precione ENTER para continuar.")
     return novo_aluno
 
 def ler_cpf(mensagem):
@@ -102,7 +102,7 @@ def emprestar_livro(aluno):
                         input(f"Livro [{livro.titulo}] emprestado com sucesso! Precione ENTER para continuar.")
                         return
                     else:
-                        input(f"O livro {livro.titulo} não está disponível no momento, precione ENTER para voltar.")
+                        input(f"O livro [{livro.titulo}] não está disponível no momento, precione ENTER para voltar.")
                     return
 
             input(f"Nenhum livro com ID [{id_busca}] encontrado, precione ENTER para continuar.")
@@ -116,20 +116,22 @@ def devolver_livro(aluno):
         input("Não há livro(s) emprestado(s) para devolver, precione ENTER para continuar.")
         return
 
-    id_busca = input("Informe o ID do livro que deseja remover")
+    id_busca = input("Informe o ID do livro que deseja devolver: ")
     if id_busca.isnumeric():
         for livro in lista_de_livros:
-            if id_busca == livro.get_id():
+            if int(id_busca) == livro.get_id():
                 if livro in aluno.get_livros_emprestados():
                     livro.disponivel = True
                     aluno.get_livros_emprestados().remove(livro)
+                    input(f"Livro [{livro.titulo}] devolvido com sucesso! Pressione ENTER para continuar.")
                     return
                 else:
                     input("Você não possui este livro, precione ENTER para continuar.")
                     return
 
         input(f"Nenhum livro com ID [{id_busca}] foi encontrado, precione ENTER para continuar")
-
+    else:
+        print("ID inválido.")
 
 def devolver_tudo(lista_de_livros: list[Livro]):
     lista_de_livros.clear()

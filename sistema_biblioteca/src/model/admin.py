@@ -14,7 +14,7 @@ class Admin(Usuario):
         id = gerar_id(lista_livros)
         novo_livro.set_id(id)
         lista_livros.append(novo_livro)
-        print(f"Livro {titulo} adicionado com sucesso!")
+        print(f"Livro [{titulo}] adicionado com sucesso!")
 
     def remover_livro(self, lista_de_alunos: list[Aluno], lista_livros: list[Livro]):
         if not lista_livros:
@@ -26,7 +26,7 @@ class Admin(Usuario):
                     if int(id_busca) == livro.get_id():
                         if livro.disponivel:
                             lista_livros.remove(livro)
-                            input(f"Livro {livro.titulo} removido com sucesso! Pressione ENTER para continuar.")
+                            input(f"Livro [{livro.titulo}] removido com sucesso! Pressione ENTER para continuar.")
                             return
                         else:
                             encontrou = False
@@ -34,7 +34,7 @@ class Admin(Usuario):
                                 for livro_emprestado in aluno.get_livros_emprestados():
                                    if livro ==  livro_emprestado:
                                        encontrou = True
-                                       input(f"Não é possível remover este livro pois ele se encontra emprestado no momento com o aluno {aluno.get_nome()},precione ENTER para continuar.")
+                                       input(f"Não é possível remover este livro pois ele se encontra emprestado no momento com o aluno {aluno.get_nome()}, precione ENTER para continuar.")
                 if not encontrou:
                     input(f"ID {id_busca} não encontrado, pressione ENTER para continuar.")
             else:
@@ -50,13 +50,18 @@ class Admin(Usuario):
             cpf_busca = input("informe o CPF do aluno que deseja remover: ")
             if cpf_busca.isnumeric():
                 for aluno in lista_de_alunos:
-                    if int(cpf_busca) == aluno.get_cpf():
-                        lista_de_alunos.remove(aluno)
-                        input(f"Aluno {aluno.get_nome()} removido com sucesso! Pressione ENTER para continuar.")
-                        return
+                    if cpf_busca == aluno.get_cpf():
+                        if not aluno.get_livros_emprestados():
+                            lista_de_alunos.remove(aluno)
+                            input(f"Aluno [{aluno.get_nome()}] removido com sucesso! Pressione ENTER para continuar.")
+                            return
+                        else:
+                            input(f"Não é possível remover o aluno [{aluno.get_nome()}], pois há pendêndia de livro(s) a devolver, precione ENTER para continuar")
+                            return
                 input(f"Nenhum CPF {cpf_busca} encontrado, pressione ENTER para continuar.")
             else:
                 input(" CPF inválido, pressione ENTER para continuar.")
+
     def listar_alunos(self, lista_alunos: list[Aluno]):
         if not lista_alunos:
             input("Lista de aluno(s) vazia, pressione ENTER para continuar.")
