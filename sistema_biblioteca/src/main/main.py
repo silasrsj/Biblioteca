@@ -12,18 +12,18 @@ def cabecalho():
     print("")
 
 def entrar_admin():
-    nome = input("Informe o nome: ")
-    cpf = input("Informe o CPF: ")
-    if nome == admin1.get_nome() and cpf == admin1.get_cpf():
+    nome = input("Login: ")
+    senha = input("Senha: ")
+    if nome == admin1.get_nome() and senha == admin1.get_cpf():
         print("\nBem vindo ao acesso Admin!")
         opcoes_admin()
     else:
-        input(f"Não existe uma conta associada ao nome [{nome}] e CPF [{cpf}]")
+        input(f"Não existe uma conta associada ao nome [{nome}]")
 
-def criar_cadastro():
-    nome = input("Informe o seu nome: ")
+def criar_cadastro(mensagem_nome, mensagem_cpf):
+    nome = input(mensagem_nome)
 
-    cpf = ler_cpf("Informe seu CPF: ")
+    cpf = ler_cpf(mensagem_cpf)
 
     for aluno in lista_de_alunos:
         if aluno.get_cpf() == cpf:
@@ -33,6 +33,7 @@ def criar_cadastro():
     novo_aluno = Aluno(nome, cpf, [])
     lista_de_alunos.append(novo_aluno)
     input(f"Usuário [ {novo_aluno.get_nome()} ] cadastrado com sucesso! Precione ENTER para continuar.")
+    return novo_aluno
 
 def ler_cpf(mensagem):
     while True:
@@ -59,15 +60,15 @@ def acessar_conta():
 
 def cabecalho_lista_biblioteca(mensagem):
     print(mensagem)
-    print("|----------------------------------------------------------|")
-    print(f"| {'ID':<5} | {'TÍTULO':<15} | {'AUTOR':<12} | {'DISPONIBILIDADE':<15} |")
-    print("|----------------------------------------------------------|")
+    print("|----------------------------------------------------------------------------|")
+    print(f"| {'ID':<5} | {'TÍTULO':<25} | {'AUTOR':<20} | {'DISPONIBILIDADE':<15} |")
+    print("|----------------------------------------------------------------------------|")
 
 def cabecalho_lista_emprestados(mensagem):
     print(mensagem)
-    print("|--------------------------------|")
-    print(f"| {'TÍTULO':<15} | {'AUTOR':<12} | ")
-    print("|--------------------------------|")
+    print("|----------------------------------------------------------|")
+    print(f"| {'ID':<5} | {'TÍTULO':<25} | {'AUTOR':<20} | ")
+    print("|----------------------------------------------------------|")
 
 def listar_livros(mensagem: str, lista_de_livros: list[Livro]):
     if not lista_de_livros:
@@ -77,52 +78,58 @@ def listar_livros(mensagem: str, lista_de_livros: list[Livro]):
         if mensagem == "LISTA DE LIVROS DA BIBLIOTECA":
             cabecalho_lista_biblioteca(mensagem)
             for livro in lista_de_livros:
-                print(f"| {livro.get_id():<5} | {livro.titulo:<15} | {livro.autor:<12} | {livro.disponibilidade():<15} |")
-            print("|----------------------------------------------------------|")
+                print(f"| {livro.get_id():<5} | {livro.titulo:<25} | {livro.autor:<20} | {livro.disponibilidade():<15} |")
+            print("|----------------------------------------------------------------------------|")
 
         elif mensagem == "LISTA DE LIVROS EMPRESTADOS":
             cabecalho_lista_emprestados(mensagem)
             for livro in lista_de_livros:
-                print(f"| {livro.titulo:<15} | {livro.autor:<12} |")
-            print("|--------------------------------|")
+                print(f"| {livro.get_id():<5} | {livro.titulo:<25} | {livro.autor:<20} |")
+            print("|----------------------------------------------------------|")
             
-def emprestar_livro(usuario):
+def emprestar_livro(aluno):
     if not lista_de_livros:
         input("Nenhum livro encontrado na Biblioteca, precione ENTER para continuar.")
         return
     else:
-        nome_de_busca = input("Informe o nome do livro que deseja emprestar: ")
-        for livro in lista_de_livros:
-            if nome_de_busca == livro.titulo:
-                if  livro.disponivel:
-                    livro.disponivel = False
-                    usuario.adicionar_livro(livro)
-                    input(f"Livro [{nome_de_busca}] emprestado com sucesso! Precione ENTER para continuar.")
+        id_busca = input("Informe o ID do livro que deseja emprestar: ")
+        if id_busca.isnumeric():
+            for livro in lista_de_livros:
+                if int(id_busca) == livro.get_id():
+                    if livro.disponivel:
+                        livro.disponivel = False
+                        aluno.adicionar_livro(livro)
+                        input(f"Livro [{livro.titulo}] emprestado com sucesso! Precione ENTER para continuar.")
+                        return
+                    else:
+                        input(f"O livro {livro.titulo} não está disponível no momento, precione ENTER para voltar.")
                     return
-                else:
-                    input(f"O livro {nome_de_busca} não está disponível no momento, precione ENTER para voltar.")
-                return
 
-        input(f"Nenhum livro [{nome_de_busca}] encontrado, precione ENTER para continuar.")
+            input(f"Nenhum livro com ID [{id_busca}] encontrado, precione ENTER para continuar.")
+        else:
+            print("ID inválido")
 
-def devolver_livro(usuario):
-    if not usuario.get_livros_emprestados():
+
+
+def devolver_livro(aluno):
+    if not aluno.get_livros_emprestados():
         input("Não há livro(s) emprestado(s) para devolver, precione ENTER para continuar.")
         return
 
-    nome_pesquisa = input("Informe o nome do livro que deseja devolver: ")
+    id_busca = input("Informe o ID do livro que deseja remover")
+    if id_busca.isnumeric():
+        for livro in lista_de_livros:
+            if id_busca == livro.get_id():
+                if livro in aluno.get_livros_emprestados():
+                    livro.disponivel = True
+                    aluno.get_livros_emprestados().remove(livro)
+                    return
+                else:
+                    input("Você não possui este livro, precione ENTER para continuar.")
+                    return
 
-    for livro in lista_de_livros:
-        if nome_pesquisa == livro.titulo:
-            if livro in usuario.get_livros_emprestados():
-                livro.disponivel = True
-                usuario.get_livros_emprestados().remove(livro)
-                return
-            else:
-                input("Você não possui este livro, precione ENTER para continuar.")
-                return
+        input(f"Nenhum livro com ID [{id_busca}] foi encontrado, precione ENTER para continuar")
 
-    input(f"Nenhum livro [{nome_pesquisa}] foi encontrado, precione ENTER para continuar")
 
 def devolver_tudo(lista_de_livros: list[Livro]):
     lista_de_livros.clear()
@@ -160,7 +167,7 @@ def opcoes_admin():
             "3": "Adicionar aluno",
             "4": "Remover aluno",
             "5": "Listar aluno(s)",
-            "6": "Listar Livros",
+            "6": "Listar livros",
             "7": "Sair"
         }
         for chave, valor in opcao.items():
@@ -173,13 +180,14 @@ def opcoes_admin():
                 admin1.adicionar_livro(lista_de_livros)
                 pass
             case "2":
-                admin1.remover_livro(lista_de_livros)
+                admin1.remover_livro(lista_de_alunos,lista_de_livros)
             case "3":
-                pass
+                criar_cadastro("Informe o nome do aluno: ", "Informe o CPF do aluno: ")
+
             case "4":
-                pass
+                admin1.remover_aluno(lista_de_alunos)
             case "5":
-                pass
+                admin1.listar_alunos(lista_de_alunos)
             case "6":
                 listar_livros("LISTA DE LIVROS DA BIBLIOTECA", lista_de_livros)
             case "7":
@@ -221,7 +229,7 @@ def opcoes_aluno(aluno):
             case 4:
                 meus_livros_emprestados(aluno)
             case 5:
-                input("Sessão encerrada com sucesso! Precione ENTER para continuar")
+                input("Sessão encerrada com sucesso! Pressione ENTER para continuar")
                 break
             case 6:
                 break
@@ -253,7 +261,7 @@ def main():
 
         match escolha:
             case 1:
-                criar_cadastro()
+                criar_cadastro("Informe seu nome: ", "Informe seu CPF: ")
             case 2:
                 acessar_conta()
                 print("Biblioteca encerrada, até mais!")

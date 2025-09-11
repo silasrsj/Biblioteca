@@ -41,4 +41,9 @@ Escolha uma das opções abaixo:
 >> Acicionar Aluno/remover
 >> Listar Alunos Cadastrados
 
-
+--------------------------------------------------------------------------
+Classe Admin:
+>> Remover um livro:
+Só é possível remover um livro que esteja disponível, caso não esteja, deve mostrar uma mensagem constando
+com qual aluno o livro se encontra.
+Pra isso, o método deve receber a lista de alunos pra poder percorrer a lista de livros emprestados do aluno
